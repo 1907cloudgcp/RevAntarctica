@@ -6,9 +6,25 @@ let dbObject = {
 
 document.getElementById('header').innerText = "YOUR TITLE GOES HERE";
 
-document.getElementById('carousel-1').src = "YOURCLOUDFUNCTION FOR GETTING AN IMAGE" || "images/penguins.jpg"
-document.getElementById('carousel-2').src = "YOURCLOUDFUNCTION FOR GETTING AN IMAGE" || "images/iceburg.jpg"
-document.getElementById('carousel-3').src = "YOURCLOUDFUNCTION FOR GETTING AN IMAGE" || "images/antarcticamountain.jpg"
+//this assumes your cloud function will return a value named address with the address to an image, in a cloud storage bucket
+async function setUpImages(){
+    let images = []
+    images.push(document.getElementById('carousel-1'))
+    images.push(document.getElementById('carousel-2'))
+    images.push(document.getElementById('carousel-3'))
+    images.forEach(async (value, index)=>{
+        //index is the numbered image in the carousel if that matters to you
+        let response = await fetch("YOURCLOUDFUNCTION FOR GETTING AN IMAGE")
+        
+    if(response.status <200 || response.status > 299){
+        value.src = "images/penguins.jpg"
+    } else {
+        data =  await response.body.json()
+        value.src = data["WHATEVER YOU NAMED THE FIELD IN YOUR RETURN"]
+    }
+    })
+}
+setUpImages()
 
 document.getElementById('calc-label').innerText = "YOU CALC LABEL TEXT"
 
@@ -37,7 +53,7 @@ async function buildTable (){
         error.innerText = "Fetch Failed"
         document.getElementById('footer-table').appendChild(error)
     }else {
-        let objectList = await objectResponse.json()
+        let objectList = await objectResponse.body.json()
        
         let headRow = document.createElement('tr')
         document.getElementById('object-table-head').appendChild(headRow)
