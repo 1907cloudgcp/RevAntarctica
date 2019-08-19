@@ -1,5 +1,5 @@
 let dbObject = {
-    name: '',
+    nombre: '',
     client:'',
     techTrack:''
 }
@@ -31,24 +31,14 @@ function calcSubmit(event){
 
 
 async function buildTable (){
-    // let objectResponse = await fetch("YOUR CLOUD FUNCTION URL FOR GETTING DATA")
-    // if(objectResponse.status <200 || objectResponse.status >299){
-    //     let error =document.createElement('p')
-    //     error.innerText = "Fetch Failed"
-    //     document.getElementById('footer-table').appendChild(error)
-    // }else {
-        //let objectList = await objectResponse.json()
-        let objectList = [
-            {
-                name: 'Ryan',
-                client:'Google',
-                techTrack:'GCP'
-            },{
-                name: 'Felix',
-                client:'Amazon',
-                techTrack:'GCP'
-            }
-        ]
+    let objectResponse = await fetch("YOUR CLOUD FUNCTION URL FOR GETTING DATA")
+    if(objectResponse.status <200 || objectResponse.status >299){
+        let error =document.createElement('p')
+        error.innerText = "Fetch Failed"
+        document.getElementById('footer-table').appendChild(error)
+    }else {
+        let objectList = await objectResponse.json()
+       
         let headRow = document.createElement('tr')
         document.getElementById('object-table-head').appendChild(headRow)
         for(key in dbObject){
@@ -77,7 +67,7 @@ async function buildTable (){
             }
         })
         
-    //}
+    }
 }
 
 function buildForm(){
