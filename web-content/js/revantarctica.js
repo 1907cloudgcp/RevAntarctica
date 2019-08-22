@@ -14,12 +14,12 @@ async function setUpImages(){
     images.push(document.getElementById('carousel-3'))
     images.forEach(async (value, index)=>{
         //index is the numbered image in the carousel if that matters to you
-        let response = await fetch("YOURCLOUDFUNCTION FOR GETTING AN IMAGE")
+        let response = await fetch("https://us-central1-cloudadmingcpdemos.cloudfunctions.net/helloworld")
         
     if(response.status <200 || response.status > 299){
         value.src = "images/penguins.jpg"
     } else {
-        data =  await response.body.json()
+        data =  await response.json()
         value.src = data["WHATEVER YOU NAMED THE FIELD IN YOUR RETURN"]
     }
     })
@@ -53,7 +53,7 @@ async function buildTable (){
         error.innerText = "Fetch Failed"
         document.getElementById('footer-table').appendChild(error)
     }else {
-        let objectList = await objectResponse.body.json()
+        let objectList = await objectResponse.json()
        
         let headRow = document.createElement('tr')
         document.getElementById('object-table-head').appendChild(headRow)
