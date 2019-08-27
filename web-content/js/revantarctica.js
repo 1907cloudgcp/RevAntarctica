@@ -30,9 +30,9 @@ document.getElementById('calc-label').innerText = "YOU CALC LABEL TEXT"
 
 document.getElementById('calc-input').type = 'text' || "YOUR INPUT TYPE, REPLACE TEXT"
 
-function calcSubmit(event){
+async function calcSubmit(event){
     event.preventDefault()
-    fetch("YOUR CALC CLOUD FUNCTION URL", {
+    let result = await fetch("YOUR CALC CLOUD FUNCTION URL", {
         method: 'POST',
         body: JSON.stringify(document.getElementById('calc-input').value)
     })
@@ -41,7 +41,11 @@ function calcSubmit(event){
     } else {
         document.getElementById('calc-input').value = ''
     }
-
+    let data = await result.json()
+    let div = document.getElementById('calc-container')
+    let display = document.createElement('p')
+    display.innerText = `Your Result is: ${data} `
+    div.appendChild(display)
 }
 
 
