@@ -128,6 +128,9 @@ function createObject(event){
     
     fetch('YOUR CLOUD FUNCTION URL FOR CREATING A NEW OBJECT',{
         method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(newObj)
     })
 }
