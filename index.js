@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, '/web-content')))
     
 // })
 
-app.listen(9090, ()=>{
+app.listen(8080, ()=>{
     console.log('Started on 9090 no cert');
     
 })

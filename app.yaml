@@ -1,9 +1,6 @@
 runtime: custom
 env: flex 
-service: RevAntarctica
-
-network:
-  forwarded_ports: 9090
+service: revantarctica
 resources:
   cpu: 1
   memory_gb: 1
@@ -13,6 +10,3 @@ automatic_scaling:
   cool_down_period_sec: 200
   cpu_utilization:
     target_utilization: 0.7
-handlers:
-- url: /.*
-  secure: optional
