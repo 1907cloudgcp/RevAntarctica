@@ -18,6 +18,7 @@ app.use('/', (req, res, next)=>{
     }
     
 })
+
 app.use(express.static(path.join(__dirname, '/web-content')))
 // let options = {
 //     key: fs.readFileSync(process.env['SERVER_KEY']),
